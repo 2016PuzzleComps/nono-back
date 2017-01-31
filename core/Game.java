@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Game {
-    ArrayList<Rule> top;
-    ArrayList<Rule> left;
+    List<Rule> top;
+    List<Rule> left;
     int height;
     int width;
     Grid grid;
@@ -27,6 +27,10 @@ public class Game {
             }
         }
         return true;
+    }
+
+    public void clear() {
+        this.grid.clear();
     }
 
 }
