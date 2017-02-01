@@ -9,7 +9,7 @@ public class Grid {
         return this.grid[x][y];
     }
 
-    public void set(int val,int x, int y) {
+    public void set(int val, int x, int y) {
         this.grid[x][y] = val;
     }
 
@@ -29,6 +29,10 @@ public class Grid {
         return this.grid[y];
     }
 
+    public void setRow(int[] row, int y) {
+        this.grid[y] = row;
+    }
+
     public int[] getColumn(int x) {
         int[] column = new int[this.grid[0].length];
         for(int i = 0; i< this.grid[0].length; i++) {
@@ -39,8 +43,8 @@ public class Grid {
 
     public void clear() {
         for(int i = 0; i < this.grid.length; i++) {
-            for(int j = 0; j <this.grid[0].length) {
-                set(0,y,x);
+            for(int j = 0; j <this.grid[0].length;j++) {
+                set(0,j,i);
             }
         }
     }

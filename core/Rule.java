@@ -2,21 +2,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Arrays;
+import java.util.stream.*;
 
 
 public class Rule {
-    public List<Integer> ruleList;
+    public int[] ruleList;
 
     public Rule() {
-        this.ruleList = new ArrayList<Integer>();
     }
 
-    public Rule(List<Integer> ruleList) {
+    public Rule(int[] ruleList) {
         this.ruleList = ruleList;
     }
 
     public boolean partiallySatisfies(int[] row, int distance) {
-        Iterator<Integer> iter = ruleList.iterator();
+        List<Integer> rulesAsList = IntStream.of(ruleList).boxed().collect(Collectors.toList());
+        Iterator<Integer> iter = rulesAsList.iterator();
         int squaresToRead = distance;
         boolean reading = true;
         int counter = 0;
@@ -68,12 +69,12 @@ public class Rule {
 
     /*
      * This function gets all the rows of the given length that fulfill
-     * this rule's requirements. 
+     * this rule's requirements.
      */
     public List<int[]> getAllSatisfyingRows(int length) {
         List<int[]> result = new ArrayList<int[]>();
-        int availableSquares = length - (sum(ruleList) + ruleList.size() - 1);
-        int availableSlots = ruleList.size() + 1;
+        int availableSquares = length - (sum(ruleList) + ruleList.length - 1);
+        int availableSlots = ruleList.length + 1;
 
         List<int[]>tuples = new ArrayList<int[]>();
         int[] lst = new int[availableSlots];
@@ -88,9 +89,9 @@ public class Rule {
             int[] rowToAdd = new int[length];
             int index = 0;
             int blockNumber = 0;
-            while (blockNumber < ruleList.size()) {
+            while (blockNumber < ruleList.length) {
                 index += arr[blockNumber];
-                int counter = ruleList.get(blockNumber);
+                int counter = ruleList[blockNumber];
                 while (counter > 0) {
                     rowToAdd[index] = 1;
                     index++;
@@ -128,19 +129,13 @@ public class Rule {
         }
     }
 
-    public static int sum(List<Integer> lst) {
-        int total = 0;
-        for(int x : lst) {
-            total+=x;
-        }
-        return total;
+    public static int sum(int[] lst) {
+        return IntStream.of(lst).sum();
     }
 
 
     public static void main(String[] args) {
-        List<Integer> rl = new ArrayList<Integer>();
-        rl.add(2);
-        rl.add(5);
+        int[] rl = {2,5};
         Rule r = new Rule(rl);
         r.getAllSatisfyingRows(11);
     }
