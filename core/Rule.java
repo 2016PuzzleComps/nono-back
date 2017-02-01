@@ -101,8 +101,6 @@ public class Rule {
                 index++;
             }
             result.add(rowToAdd);
-            System.out.println(Arrays.toString(arr));
-            System.out.println(Arrays.toString(rowToAdd));
         }
 
         return result;
