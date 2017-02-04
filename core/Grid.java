@@ -51,4 +51,24 @@ public class Grid {
         }
     }
 
+    public int getNumFilled() {
+        int filled = 0;
+        for (int[] row : grid) {
+            for (int i : row) {
+                if (i==1) filled++;
+            }
+        }
+        return filled;
+    }
+
+    public int getHeight() {
+        return grid.length;
+    }
+
+    public int getWidth() {
+        if (grid.length == 0)
+            return 0;
+        return grid[0].length;
+    }
+
 }

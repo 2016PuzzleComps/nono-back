@@ -6,6 +6,6 @@ public class RatioFilledEvaluator implements Evaluator {
 
     @Override
     public double eval(Grid g) {
-        return 0;
+        return ((double)g.getNumFilled())/(g.getWidth()*g.getHeight());
     }
 }
