@@ -71,4 +71,8 @@ public class Grid {
         return grid[0].length;
     }
 
+    public int[][] toArr() {
+        return this.grid;
+    }
+
 }

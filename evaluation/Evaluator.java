@@ -7,5 +7,5 @@ public interface Evaluator {
     /*
      * Not scaled
      */
-    public double eval(Grid g);
+    public double eval(Game g);
 }

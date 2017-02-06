@@ -92,6 +92,14 @@ public class Game {
         return lst;
     }
 
+    public Grid getGrid() {
+        return this.grid;
+    }
+
+    public Rule[] getRule(boolean top) {
+        return top ? this.top : this.left;
+    }
+
     public static void main(String[] args) {
         Game gm = new Game(5,5);
         Rule rl1 = new Rule(new int[]{3,1});
