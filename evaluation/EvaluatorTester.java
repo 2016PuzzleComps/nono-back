@@ -33,6 +33,7 @@ public class EvaluatorTester {
         evals.add(new RatioFilledEvaluator());
         evals.add(new LeastConstrainedEvaluator());
         evals.add(new MostConstrainedEvaluator());
+        evals.add(new ImmediateFillEvaluator());
         for (Evaluator eval : evals) {
             System.out.println(eval.eval(gm));
         }
