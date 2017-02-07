@@ -69,7 +69,7 @@ public class Game {
                     return false;
                 }
                 else {
-                    System.out.println("hello");
+                    //System.out.println("hello");
                 }
             }
             return true;
@@ -90,6 +90,14 @@ public class Game {
             lst.add(Integer.valueOf(arr[j]));
         }
         return lst;
+    }
+
+    public void setTop(Rule[] top) {
+        this.top = top;
+    }
+
+    public void setLeft(Rule[] left) {
+        this.left = left;
     }
 
     public Grid getGrid() {

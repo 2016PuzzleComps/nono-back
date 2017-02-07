@@ -11,10 +11,10 @@ public class LeastConstrainedEvaluator implements Evaluator {
         for (Rule rule : g.getRule(true)) {
             currentSize = g.getGrid().getWidth();
             for (int i : rule.getRuleList()) {
-                currentSize += i + 1;
+                currentSize -= i + 1;
             }
             // The last block of filled in squares can be at the end
-            currentSize -= 1;
+            currentSize += 2;
             if (currentSize > leastConstrained) {
                 leastConstrained = currentSize;
             }
