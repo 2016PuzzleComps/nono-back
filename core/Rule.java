@@ -17,6 +17,7 @@ public class Rule {
         this.ruleList = ruleList;
     }
 
+    //Checks if the given row satisfies this rule up to the given distance.
     public boolean partiallySatisfies(int[] row, int distance) {
         List<Integer> rulesAsList = IntStream.of(ruleList).boxed().collect(Collectors.toList());
         Iterator<Integer> iter = rulesAsList.iterator();

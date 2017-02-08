@@ -75,4 +75,21 @@ public class Grid {
         return this.grid;
     }
 
+    //Fraction of neighbors that are filled in. Used in generation.
+    public double fractionOfNeighborsLiving(int x, int y) {
+        int numNeighbors = 0;
+        int numLivingNeighbors = 0;
+        for (int i = x-1; i <x+2; i++) {
+            for (int j = y-1; j < y+2; j++) {
+                if (i >= 0 && i< getWidth() && j>=0 && j<getHeight()) {
+                    numNeighbors++;
+                    if (this.get(i,j)==1) {
+                        numLivingNeighbors++;
+                    }
+                }
+            }
+        }
+        return ((double) numLivingNeighbors)/numNeighbors;
+    }
+
 }
