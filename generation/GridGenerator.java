@@ -4,11 +4,11 @@ import java.util.Random;
 import java.util.Arrays;
 import core.*;
 
-public class Generator {
+public class GridGenerator {
 
     Random rng;
 
-    public Generator() {
+    public GridGenerator() {
         rng = new Random();
     }
 
@@ -41,7 +41,7 @@ public class Generator {
     }
 
     public static void main(String[] args) {
-        Generator gn = new Generator();
+        GridGenerator gn = new GridGenerator();
         Grid g =  gn.generate(10,10,0.3,0.3);
 
         for (int[] row : g.toArr()) {

@@ -114,6 +114,10 @@ public class Rule {
         return this.ruleList;
     }
 
+    public void setRuleList(int[] rl) {
+        this.ruleList = rl;
+    }
+
 
     /*If array is read as a number by digit, where the first index represents
      * the 1's place, this function modifies array so it represents the next

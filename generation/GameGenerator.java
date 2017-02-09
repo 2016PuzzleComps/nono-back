@@ -1,7 +1,9 @@
+package generation;
 import core.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameGenerator {
 
@@ -12,14 +14,15 @@ public class GameGenerator {
     public Game generate() {
         GridGenerator gridGen = new GridGenerator();
         Grid grid = gridGen.generate(10,10,0.3,0.3);
-        Game result = new Game();
+        Game result = new Game(10,10);
         result.setGrid(grid);
-        for (int i = 0; i < result.width; i++) {
-            result.getRule(true)[i] = fullRuleFromRow(result.getGrid.getColumn(i));
+        for (int i = 0; i < result.width(); i++) {
+            result.getRule(true)[i] = fillRuleFromRow(result.getGrid().getColumn(i));
         }
-        for (int i = 0; i < result.height; i++) {
-            result.getRule(false)[i] = fullRuleFromRow(result.getGrid.getRow(i));
+        for (int i = 0; i < result.height(); i++) {
+            result.getRule(false)[i] = fillRuleFromRow(result.getGrid().getRow(i));
         }
+        result.clear();
         return result;
     }
 
@@ -41,7 +44,22 @@ public class GameGenerator {
             ruleList.add(counter);
             counter = 0;
         }
-        int[] rl = ruleList.toArray(new int[ruleList.size()]);
+        int[] rl = new int[ruleList.size()];
+        for(int i = 0; i < ruleList.size(); i++) {
+            rl[i] = ruleList.get(i);
+        }
         return new Rule(rl);
+    }
+
+    public static void main(String[] args) {
+        GameGenerator gg = new GameGenerator();
+        Game g = gg.generate();
+        for (int[] row : g.getGrid().toArr()) {
+            System.out.println(Arrays.toString(row));
+        }
+        g.solve();
+        for (int[] row : g.getGrid().toArr()) {
+            System.out.println(Arrays.toString(row));
+        }
     }
 }

@@ -20,6 +20,14 @@ public class Game {
         this.grid = new Grid(width, height);
     }
 
+    public int height() {
+        return this.height;
+    }
+
+    public int width() {
+        return this.width;
+    }
+
     public boolean isSolved() {
         for(int i=0;i<height;i++) {
             if(!this.left[i].satisfies(this.grid.getRow(i))) {
@@ -98,6 +106,10 @@ public class Game {
 
     public void setLeft(Rule[] left) {
         this.left = left;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 
     public Grid getGrid() {
