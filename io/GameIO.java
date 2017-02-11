@@ -5,8 +5,10 @@ import core.Game;
 import core.Rule;
 import generation.GameGenerator;
 
+import java.io.*;
+
 public class GameIO {
-    public static String saveToFile(Game game) {
+    public static String gameToFileString(Game game) {
         String line = "";
         boolean isFirstInRule = true, isFirstRule = true;
         for (Rule rule : game.getRule(true)) {
@@ -35,9 +37,18 @@ public class GameIO {
         return line;
     }
 
+    public static void saveToFile(String toSave, String filename) {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(filename), "utf-8"))) {
+            writer.write(toSave);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         GameGenerator gen = new GameGenerator();
         Game g = gen.generate();
-        System.out.print(saveToFile(g));
+        saveToFile(gameToFileString(g), "out.txt");
     }
 }
