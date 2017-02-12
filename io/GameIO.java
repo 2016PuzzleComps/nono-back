@@ -6,6 +6,12 @@ import core.Rule;
 import generation.GameGenerator;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GameIO {
     public static String gameToFileString(Game game) {
@@ -46,9 +52,61 @@ public class GameIO {
         }
     }
 
+    public static Game loadGameFromFile(String filename) {
+        Game g = null;
+        List<Rule> top = new ArrayList<>();
+        List<Rule> left = new ArrayList<>();
+        try {
+            String line;
+            FileReader fileReader = new FileReader(filename);
+
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+
+            boolean isTop = true;
+            while((line = bufferedReader.readLine()) != null) {
+                // Deal with bad inputs
+                System.out.println(line);
+                line = line.replaceAll(",,",",0,");
+                line = line.replaceAll(",,",",0,");
+                if (line.charAt(line.length()-1) == ',')
+                    line = line + "0";
+                System.out.println(line);
+
+                List<Rule> listToAdd = isTop ? top : left;
+                for (String rule : line.split(",")) {
+                    int[] ruleList = Arrays.stream(rule.split(" "))
+                            .map(String::trim).mapToInt(Integer::parseInt).toArray();
+                    listToAdd.add(new Rule(ruleList));
+                }
+                isTop = false;
+            }
+
+            bufferedReader.close();
+
+            // Once we've read the file to see what size the board is,
+            // create the game object
+            g = new Game(top.size(), left.size());
+
+            g.setTop(top.toArray(new Rule[top.size()]));
+            g.setLeft(left.toArray(new Rule[left.size()]));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
     public static void main(String[] args) {
         GameGenerator gen = new GameGenerator();
         Game g = gen.generate();
         saveToFile(gameToFileString(g), "out.txt");
+        g = loadGameFromFile("game2.txt");
+        g.solve();
+        for (int[] i : g.getGrid().toArr()) {
+            for (int j : i) {
+                System.out.print(j+" ");
+            }
+            System.out.println();
+        }
     }
 }
