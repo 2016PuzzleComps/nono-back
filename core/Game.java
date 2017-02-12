@@ -46,17 +46,22 @@ public class Game {
         this.grid.clear();
     }
 
-
+    //Returns true if the board can be solved. Changes the grid to solved state.
     public boolean solve() {
         clear();
+        //Precompute row and column possibilities.
         List<List<int[]>> rowPossibilities = new ArrayList<List<int[]>>();
         List<List<int[]>> columnPossibilities = new ArrayList<List<int[]>>();
         for(int i = 0;i<height;i++) {
             rowPossibilities.add(left[i].getAllSatisfyingRows(width));
         }
+
         for(int i = 0;i<width;i++) {
             columnPossibilities.add(top[i].getAllSatisfyingRows(height));
         }
+        //Change the list of column possibilities to a set for quick lookup.
+        //Can't have a set of int[]'s so we have to convert to List<Integer>
+        //We're creating a list of sets here, one for each column.
         List<Set<List<Integer>>> columnPossibilitiesSet = new ArrayList<Set<List<Integer>>>();
         for(int i = 0;i<width;i++) {
             Set<List<Integer>> thisColumnSet = new HashSet<List<Integer>>();
@@ -66,11 +71,14 @@ public class Game {
             columnPossibilitiesSet.add(thisColumnSet);
         }
 
+        //Calls recursive method, see below.
         return solveHelper(columnPossibilitiesSet,rowPossibilities,0);
 
     }
 
+    //Each call of this function has an associated depth to it.
     public boolean solveHelper(List<Set<List<Integer>>> columnPossibilitiesSet, List<List<int[]>> rowPossibilities, int depth) {
+        //If this is the last depth, check if the columns are valid.
         if (depth == height) {
             for (int i=0;i<width;i++) {
                 if (!columnPossibilitiesSet.get(i).contains(getListFromArray(this.grid.getColumn(i)))) {
@@ -82,12 +90,15 @@ public class Game {
             }
             return true;
         }
+        //Otherwise, try filling in the next row with each choice and
+        //call recursively.
         for (int[] row : rowPossibilities.get(depth)) {
             this.grid.setRow(row, depth);
             if (solveHelper(columnPossibilitiesSet,rowPossibilities,depth + 1)) {
                 return true;
             }
         }
+        //Clear the row. 
         this.grid.setRow(new int[width], depth);
         return false;
     }

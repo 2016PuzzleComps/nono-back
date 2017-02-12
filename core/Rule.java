@@ -105,7 +105,7 @@ public class Rule {
             }
             result.add(rowToAdd);
         }
-
+        System.out.println(result.size());
         return result;
 
     }
