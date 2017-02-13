@@ -6,9 +6,6 @@ import core.Rule;
 import generation.GameGenerator;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,14 +96,12 @@ public class GameIO {
     public static void main(String[] args) {
         GameGenerator gen = new GameGenerator();
         Game g = gen.generate();
-        saveToFile(gameToFileString(g), "out.txt");
-        g = loadGameFromFile("game2.txt");
+        //saveToFile(gameToFileString(g), "out.txt");
+        //g = loadGameFromFile("game2.txt");
+        g.printClues();
+        System.out.println("----------------");
         g.solve();
-        for (int[] i : g.getGrid().toArr()) {
-            for (int j : i) {
-                System.out.print(j+" ");
-            }
-            System.out.println();
-        }
+        System.out.println("----------------");
+        g.printGrid();
     }
 }

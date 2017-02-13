@@ -13,8 +13,9 @@ public class GameGenerator {
 
     public Game generate() {
         GridGenerator gridGen = new GridGenerator();
-        Grid grid = gridGen.generate(10,10,0.3,0.3);
-        Game result = new Game(10,10);
+        int size = 10;
+        Grid grid = gridGen.generate(size,size,0.3,0.3);
+        Game result = new Game(size,size);
         result.setGrid(grid);
         for (int i = 0; i < result.width(); i++) {
             result.getRule(true)[i] = fillRuleFromRow(result.getGrid().getColumn(i));
