@@ -41,12 +41,18 @@ public class GameIO {
     }
 
     public static void saveToFile(String toSave, String filename) {
+        try (FileOutputStream out = new FileOutputStream(filename)) {
+            out.write(toSave.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(filename), "utf-8"))) {
             writer.write(toSave);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static Game loadGameFromFile(String filename) {

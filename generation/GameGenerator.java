@@ -12,8 +12,12 @@ public class GameGenerator {
     }
 
     public Game generate() {
-        GridGenerator gridGen = new GridGenerator();
         int size = 10;
+        return generateSize(size);
+    }
+
+    public Game generateSize(int size) {
+        GridGenerator gridGen = new GridGenerator();
         Grid grid = gridGen.generate(size,size,0.3,0.3);
         Game result = new Game(size,size);
         result.setGrid(grid);
