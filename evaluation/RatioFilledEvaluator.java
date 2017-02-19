@@ -16,4 +16,9 @@ public class RatioFilledEvaluator implements Evaluator {
         Grid grid = g.getGrid();
         return ((double)grid.getNumFilled())/(grid.getWidth()*grid.getHeight());
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }

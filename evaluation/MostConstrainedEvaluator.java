@@ -16,4 +16,9 @@ public class MostConstrainedEvaluator implements Evaluator {
     public double eval(Game g) {
         return Collections.max(Util.getListOfConstraintments(g));
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }

@@ -12,4 +12,8 @@ public class AverageConstraintEvaluator implements Evaluator{
         List<Integer> constrainments = Util.getListOfConstraintments(g);
         return constrainments.stream().mapToInt(Integer::intValue).sum()/constrainments.size();
     }
+    @Override
+    public String description() {
+        return "";
+    }
 }

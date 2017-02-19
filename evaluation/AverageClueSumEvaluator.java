@@ -18,4 +18,9 @@ public class AverageClueSumEvaluator implements Evaluator {
         }
         return sum/(g.getGrid().toArr().length+g.getGrid().toArr()[0].length);
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }

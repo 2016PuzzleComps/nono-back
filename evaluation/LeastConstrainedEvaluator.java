@@ -11,4 +11,9 @@ public class LeastConstrainedEvaluator implements Evaluator {
         return Collections.min(Util.getListOfConstraintments(g));
 
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }

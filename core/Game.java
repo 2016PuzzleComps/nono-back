@@ -219,6 +219,10 @@ public class Game {
         System.out.println(line);
     }
 
+    public long hash() {
+        return this.toString().hashCode();
+    }
+
     public static List<Integer> getListFromArray(int[] arr) {
         List<Integer> lst = new ArrayList<Integer>(arr.length);
         for (int j = 0; j < arr.length; j++) {
@@ -245,6 +249,36 @@ public class Game {
 
     public Rule[] getRule(boolean top) {
         return top ? this.top : this.left;
+    }
+
+    @Override
+    public String toString() {
+        String line = "";
+        boolean isFirstInRule = true, isFirstRule = true;
+        for (Rule rule : this.top) {
+            if (!isFirstRule) line += ",";
+            isFirstRule = false;
+            isFirstInRule = true;
+            for (int i : rule.getRuleList()) {
+                if (!isFirstInRule) line += " ";
+                line += i;
+                isFirstInRule = false;
+            }
+        }
+        line += "\n";
+        isFirstRule = true;
+        for (Rule rule : this.left) {
+            if (!isFirstRule) line += ",";
+            isFirstRule = false;
+            isFirstInRule = true;
+            for (int i : rule.getRuleList()) {
+                if (!isFirstInRule) line += " ";
+                line += i;
+                isFirstInRule = false;
+            }
+        }
+
+        return line;
     }
 
     public static void main(String[] args) {
